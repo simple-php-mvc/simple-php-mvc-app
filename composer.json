@@ -1,0 +1,17 @@
+{
+  "name":"simple-php-mvc/simple-php-mvc-app",
+  "type": "library",
+  "description": "Simple PHP-MVC Application",
+  "license": "GPL-2.0",
+  "keywords": ["framework", "application"],
+  "authors": [
+    {
+      "name": "Ramón Serrano",
+      "email": "ramon.calle.88@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "simple-php-mvc/simple-php-mvc": ">=1.6"
+  }
+}

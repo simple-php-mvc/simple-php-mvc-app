@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+$loader = require __DIR__ . '/autoload.php';
+
+use MVC\Tests\Provider\ConsoleSymfonyProvider;
+use Symfony\Component\Console\Command\ListCommand;
+use Symfony\Component\Console\Input\ArgvInput;
+
+$mvc = new AppMVC();
+
+# Console Symfony Provider Instance
+$csp = new ConsoleSymfonyProvider(array(
+    'modules'  => $mvc->setModules(),
+    'commands' => array(
+        new ListCommand()
+    )
+));
+
+$mvc->registerProvider($csp);
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
+$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
+$mvc->config('debug', $debug);
+
+$mvc->getCvpp('symfony.console')->run($input);

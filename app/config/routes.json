@@ -1,0 +1,6 @@
+[{
+    "method": ["get", "post", "ajax"],
+    "pattern": "/index",
+    "action": "MVC\\Tests\\TestModule\\Controller\\FooController::indexAction",
+    "name": "json"
+}]
