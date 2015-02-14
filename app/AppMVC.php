@@ -21,7 +21,7 @@ class AppMVC extends BaseMVC
     public function setModules()
     {
         $modules = array(
-            new MVC\Tests\TestModule\TestModule(),
+            new AppModule\AppModule(),
         );
         
         return $modules;
@@ -39,12 +39,12 @@ class AppMVC extends BaseMVC
                 'host'   => '127.0.0.1',
                 'user'   => 'root',
                 'passwd' => '',
-                'dbname' => 'sf_etituymedio'
+                'dbname' => 'app'
             )),
             new MVC\Tests\Provider\DoctrineDBALProvider(array(
                 'charset'  => null,
                 'driver'   => 'pdo_mysql',
-                'dbname'   => 'test',
+                'dbname'   => 'app',
                 'host'     => 'localhost',
                 'user'     => 'root',
                 'password' => null,
@@ -54,7 +54,7 @@ class AppMVC extends BaseMVC
                 'params'       => array(
                     'charset'  => null,
                     'driver'   => 'pdo_mysql',
-                    'dbname'   => 'test',
+                    'dbname'   => 'app',
                     'host'     => 'localhost',
                     'user'     => 'root',
                     'password' => null,
@@ -75,10 +75,6 @@ class AppMVC extends BaseMVC
             )),
         );
         
-        $providers[] = new MVC\Tests\TestModule\TestProvider(array(
-            
-        ));
-        
         return $providers;
     }
     
@@ -90,17 +86,6 @@ class AppMVC extends BaseMVC
     public function setRoutes()
     {
         $routes = parent::setRoutes();
-        
-        $routes[] = array(
-            array(
-                "method"  => ["ajax", "get", "post"],
-                "pattern" => "/",
-                "action"  => function() {
-                    return 'Index';
-                },
-                "name"    => "index"
-            )
-        );
         
         return $routes;
     }
