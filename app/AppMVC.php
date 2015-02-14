@@ -1,6 +1,6 @@
 <?php
 
-use MVC\MVC;
+use MVC\MVC as BaseMVC;
 use MVC\Module\Module;
 use MVC\Provider\Provider;
 use MVC\Server\Route;
@@ -10,7 +10,7 @@ use MVC\Server\Route;
  *
  * @author Ramón Serrano <ramon.calle.88@gmail.com>
  */
-class AppMVC extends MVC
+class AppMVC extends BaseMVC
 {
     
     /**
@@ -21,7 +21,7 @@ class AppMVC extends MVC
     public function setModules()
     {
         $modules = array(
-            new \MVC\Tests\TestModule\TestModule(),
+            new MVC\Tests\TestModule\TestModule(),
         );
         
         return $modules;
@@ -35,13 +35,13 @@ class AppMVC extends MVC
     public function setProviders()
     {
         $providers = array(
-            new \MVC\DataBase\PdoProvider(array(
+            new MVC\DataBase\PdoProvider(array(
                 'host'   => '127.0.0.1',
                 'user'   => 'root',
                 'passwd' => '',
                 'dbname' => 'sf_etituymedio'
             )),
-            new \MVC\Tests\Provider\DoctrineDBALProvider(array(
+            new MVC\Tests\Provider\DoctrineDBALProvider(array(
                 'charset'  => null,
                 'driver'   => 'pdo_mysql',
                 'dbname'   => 'test',
@@ -50,7 +50,7 @@ class AppMVC extends MVC
                 'password' => null,
                 'port'     => null,
             )),
-            new \MVC\Tests\Provider\DoctrineORMProvider(array(
+            new MVC\Tests\Provider\DoctrineORMProvider(array(
                 'params'       => array(
                     'charset'  => null,
                     'driver'   => 'pdo_mysql',
@@ -67,15 +67,15 @@ class AppMVC extends MVC
                 ),
                 'proxy_dir'    => null
             )),
-            new \MVC\Tests\Provider\MonologProvider(array(
+            new MVC\Tests\Provider\MonologProvider(array(
 
             )),
-            new \MVC\Tests\Provider\TwigProvider(array(
-                'path' => $this->getAppDir() . '/../src/MVC/Tests/TestModule/Resources/views'
+            new MVC\Tests\Provider\TwigProvider(array(
+                'path' => $this->getAppDir() . '/Views'
             )),
         );
         
-        $providers[] = new \MVC\Tests\TestModule\TestProvider(array(
+        $providers[] = new MVC\Tests\TestModule\TestProvider(array(
             
         ));
         
