@@ -36,7 +36,7 @@ Plantilla con el Modelo Vista Controlador
 #### **Instalar composer**
 
 #### **Git clone** (recomendada)
-Clonar el repositorio en [github](#"https://github.com/simple-php-mvc/simple-php-mvc"). Y luego entrar en la carpeta clonada a través del terminal y luego ejecuta **composer install** para instalar todas las dependencias del projecto en la carpeta `vendor`.
+Clonar el repositorio en [github](#"https://github.com/simple-php-mvc/simple-php-mvc-app"). Y luego entrar en la carpeta clonada a través del terminal y luego ejecuta **composer install** para instalar todas las dependencias del projecto en la carpeta `vendor`.
 
 > **Nota:** esta es la forma recomendada de instalación para obtener la aplicación configurada.
 
@@ -48,7 +48,7 @@ Clonar el repositorio en [github](#"https://github.com/simple-php-mvc/simple-php
 ```json
 {
    "require": {
-      "simple-php-mvc/simple-php-mvc": '1.6'
+      "simple-php-mvc/simple-php-mvc-app": 'dev-master'
    }
 }
 ```
@@ -82,7 +82,7 @@ proyecto
 ```php
 <?php
 
-use MVC\MVC;
+use MVC\MVC as BaseMVC;
 use MVC\Module\Module;
 use MVC\Provider\Provider;
 use MVC\Server\Route;
@@ -92,7 +92,7 @@ use MVC\Server\Route;
  *
  * @author Ramón Serrano <ramon.calle.88@gmail.com>
  */
-class AppMVC extends MVC
+class AppMVC extends BaseMVC
 {
     
     /**
@@ -103,7 +103,7 @@ class AppMVC extends MVC
     public function setModules()
     {
         $modules = array(
-            new \MVC\Tests\EjemploModule\EjemploModule(),
+            new MVC\Tests\EjemploModule\EjemploModule(),
         );
         
         return $modules;
@@ -117,10 +117,10 @@ class AppMVC extends MVC
     public function setProviders()
     {
         $providers = array(
-            new \MVC\DataBase\PdoProvider(array(
-                'dbname' => 'sf_etituymedio'
+            new MVC\DataBase\PdoProvider(array(
+                'dbname' => 'test'
             )),
-            new \MVC\Tests\Provider\DoctrineDBALProvider(array(
+            new MVC\Tests\Provider\DoctrineDBALProvider(array(
                 'charset'  => null,
                 'driver'   => 'pdo_mysql',
                 'dbname'   => 'test',
@@ -129,7 +129,7 @@ class AppMVC extends MVC
                 'password' => null,
                 'port'     => null,
             )),
-            new \MVC\Tests\Provider\DoctrineORMProvider(array(
+            new MVC\Tests\Provider\DoctrineORMProvider(array(
                 'params'       => array(
                     'charset'  => null,
                     'driver'   => 'pdo_mysql',
@@ -146,15 +146,15 @@ class AppMVC extends MVC
                 ),
                 'proxy_dir'    => null
             )),
-            new \MVC\Tests\Provider\MonologProvider(array(
+            new MVC\Tests\Provider\MonologProvider(array(
 
             )),
-            new \MVC\Tests\Provider\TwigProvider(array(
+            new MVC\Tests\Provider\TwigProvider(array(
                 'path' => $this->getAppDir() . '/../src/MVC/Tests/EjemploModule/Resources/views'
             )),
         );
         
-        $providers[] = new \MVC\Tests\EjemploModule\EjemploProvider(array(
+        $providers[] = new MVC\Tests\EjemploModule\EjemploProvider(array(
             
         ));
         
@@ -232,6 +232,24 @@ class Nombre_del_Modelo extends Model
 }
 ```
 
+También DBAL Model
+```php
+<?php
+namespace ModelsNamespace;
+
+use Doctrine\DBAL\Connection,
+    MVC\DataBase\DBALModel as Model;
+
+class Nombre_del_Modelo extends Model
+{
+    public function __construct(Connection $conn)
+    {
+        parent::__construct($conn, 'nombre_tabla');
+    }
+}
+```
+
+
 ## <a name='rutas'></a> Rutas
 Una ruta se representa como cualquier URI con métodos de consulta que se envía al servidor. 
 
@@ -254,6 +272,8 @@ En la carpeta `app/config` en el archivo **`routes.json`** o **`routes.php`** se
 o
 ```php
 
+use MVC\Server\Route;
+
 <?php
 return array(
     array(
@@ -263,10 +283,7 @@ return array(
         "name"    => "foo_index"
     ),
     array(
-        "method"  => ["ajax", "delete", "get", "post", "put", "head", "options"],
-        "pattern" => "/index2",
-        "action"  => "ControllerNamespace\\FooController::index2Action",
-        "name"    => "foo_index2"
+        new Route(Route::$validMethods, '/', 'ControllerNamespace\\FooController::indexAction2', 'foo_index2')
     ),
 );
 ```
