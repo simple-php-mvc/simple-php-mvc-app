@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Simple PHP MVC Application : Simple PHP MVC Application">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Simple PHP MVC Application</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/simple-php-mvc/simple-php-mvc-app">View on GitHub</a>
+
+          <h1 id="project_title">Simple PHP MVC Application</h1>
+          <h2 id="project_tagline">Simple PHP MVC Application</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/simple-php-mvc/simple-php-mvc-app/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/simple-php-mvc/simple-php-mvc-app/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="simple-php-mvc" class="anchor" href="#simple-php-mvc" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple PHP-MVC</h1>
+
+<p>Plantilla con el Modelo Vista Controlador</p>
+
+<h3>
+<a id="tabla-de-contenidos" class="anchor" href="#tabla-de-contenidos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tabla de Contenidos</h3>
+
+<ul>
+<li><a href="#instalacion">Instalación</a></li>
+<li><a href="#configuracion">Configuración</a></li>
+<li><a href="#rut-vis-cont">Rutas, Vistas y Controladores</a></li>
+<li><a href="#modelos">Modelos</a></li>
+<li>
+<a href="#rutas">Rutas</a>
+
+<ul>
+<li><a href="#rutas-get">GET</a></li>
+<li><a href="#rutas-post">POST</a></li>
+<li><a href="#rutas-DELETE">DELETE</a></li>
+<li><a href="#rutas-put">PUT</a></li>
+<li><a href="#rutas-options">OPTIONS</a></li>
+<li><a href="#rutas-head">HEAD</a></li>
+<li><a href="#rutas-ajax">AJAX</a></li>
+<li><a href="#rutas-group">Grupos de rutas</a></li>
+</ul>
+</li>
+<li><a href="#rutas-params">Parámetros de rutas</a></li>
+<li><a href="#redirect">Redireccionamiento</a></li>
+<li><a href="#providers">Proveedores o servicios</a></li>
+<li>
+<a href="#otros">Otros aspectos</a>
+
+<ul>
+<li><a href="#otros-controllers">controller($name = null)</a></li>
+<li><a href="#otros-models">model($name = null)</a></li>
+<li><a href="#otros-view">view()</a></li>
+<li><a href="#otros-request">request()</a></li>
+<li><a href="#otros-response">response()</a></li>
+</ul>
+</li>
+<li><a href="#pruebas">Pruebas Unitarias</a></li>
+<li><a href="#hola-mundo">Ejemplo: Hola mundo</a></li>
+<li><a href="#ejemplo2">Ejemplo2: Usando Modelos y Controladores</a></li>
+<li><a href="#usando-consola">Usando la consola</a></li>
+<li><a href="#autor">Autor</a></li>
+</ul>
+
+<h3>
+<a id="-instalación" class="anchor" href="#-instalaci%C3%B3n" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="instalacion"></a> Instalación</h3>
+
+<h4>
+<a id="instalar-composer" class="anchor" href="#instalar-composer" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Instalar composer</strong>
+</h4>
+
+<h4>
+<a id="git-clone-recomendada" class="anchor" href="#git-clone-recomendada" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<strong>Git clone</strong> (recomendada)</h4>
+
+<p>Clonar el repositorio en github. Y luego entrar en la carpeta clonada a través del terminal y luego ejecuta <strong>composer install</strong> para instalar todas las dependencias del projecto en la carpeta <code>vendor</code>.</p>
+
+<blockquote>
+<p><strong>Nota:</strong> esta es la forma recomendada de instalación para obtener la aplicación configurada.</p>
+</blockquote>
+
+<h4>
+<a id="composer-install" class="anchor" href="#composer-install" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Composer install</strong>
+</h4>
+
+<p>-- Crea una carpeta con el nombre de tu proyecto.
+-- Entra en la carpeta que creaste y agrega un archivo composer.json con el contenido</p>
+
+<div class="highlight highlight-json"><pre>{
+   <span class="pl-s1"><span class="pl-pds">"</span>require<span class="pl-pds">"</span></span>: {
+      <span class="pl-s1"><span class="pl-pds">"</span>simple-php-mvc/simple-php-mvc-app<span class="pl-pds">"</span></span>: <span class="pl-ii">'dev-master'</span>
+   }
+}</pre></div>
+
+<p>-- Abre una terminal de tu sistema operativo y ejecuta en la carpeta del proyecto <strong>composer install</strong> y espera a que se instale Simple PHP MVC.</p>
+
+<h4>
+<a id="composer-create-project" class="anchor" href="#composer-create-project" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Composer create-project</strong>
+</h4>
+
+<p>Otra forma de instalar con composer es ejecutando el comando <strong>composer install simple-php-mvc/simple-php-mvc</strong> en la terminal de tu sistema operativo.</p>
+
+<h3>
+<a id="-configuración" class="anchor" href="#-configuraci%C3%B3n" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="configuracion"></a> Configuración</h3>
+
+<blockquote>
+<p>Asegúrate de que la carpeta raíz del sistema tenga los permisos apropiados con <code>sudo chmod 755 -R</code>.</p>
+</blockquote>
+
+<pre><code>proyecto
+|_ app/
+    |_ config/
+       routes.json
+       routes.php
+    .htaccess
+    AppMVC.php
+    autoload.php
+    console
+|_ src/
+|_ vendor/
+|_ web/
+   .htaccess
+   app.php
+   app_dev.php
+</code></pre>
+
+<blockquote>
+<p><strong>Importante: ** en el archivo **<code>app/AppMVC.php</code></strong> es la configuración de los módulos, proveedores o servicios y las rutas, y puede ser como el siguiente:</p>
+</blockquote>
+
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\MVC</span> <span class="pl-k">as</span> <span class="pl-s3">BaseMVC</span>;</span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\Module\Module</span>;</span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\Provider\Provider</span>;</span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\Server\Route</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c"> * Description of AppMVC</span></span>
+<span class="pl-s2"><span class="pl-c"> *</span></span>
+<span class="pl-s2"><span class="pl-c"> * <span class="pl-k">@author</span> Ramón Serrano &lt;ramon.calle.88@gmail.com&gt;</span></span>
+<span class="pl-s2"><span class="pl-c"> */</span></span>
+<span class="pl-s2"><span class="pl-st">class</span> <span class="pl-en">AppMVC</span> <span class="pl-s">extends</span> <span class="pl-e">BaseMVC</span></span>
+<span class="pl-s2">{</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Set MVC Application Modules</span></span>
+<span class="pl-s2"><span class="pl-c">     * </span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> Module[]</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">setModules</span>()</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-vo">$modules</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-k">new</span> <span class="pl-s3">MVC\Tests\EjemploModule\</span><span class="pl-s3">EjemploModule</span>(),</span>
+<span class="pl-s2">        );</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-k">return</span> <span class="pl-vo">$modules</span>;</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Set MVC Application Providers</span></span>
+<span class="pl-s2"><span class="pl-c">     * </span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> Provider[]</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">setProviders</span>()</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-vo">$providers</span> <span class="pl-k">=</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">            <span class="pl-k">new</span> <span class="pl-s3">MVC\DataBase\</span><span class="pl-s3">PdoProvider</span>(<span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>dbname<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">            )),</span>
+<span class="pl-s2">            <span class="pl-k">new</span> <span class="pl-s3">MVC\Tests\Provider\</span><span class="pl-s3">DoctrineDBALProvider</span>(<span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>charset<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-c1">null</span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>driver<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>pdo_mysql<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>dbname<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>host<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>localhost<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>user<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>root<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">null</span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>port<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-c1">null</span>,</span>
+<span class="pl-s2">            )),</span>
+<span class="pl-s2">            <span class="pl-k">new</span> <span class="pl-s3">MVC\Tests\Provider\</span><span class="pl-s3">DoctrineORMProvider</span>(<span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>params<span class="pl-pds">'</span></span>       <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>charset<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-c1">null</span>,</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>driver<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>pdo_mysql<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>dbname<span class="pl-pds">'</span></span>   <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>test<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>host<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>localhost<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>user<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>root<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">null</span>,</span>
+<span class="pl-s2">                    <span class="pl-s1"><span class="pl-pds">'</span>port<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-c1">null</span>,</span>
+<span class="pl-s2">                ),</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>dev_mode<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>etities_type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">'</span>annotations<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>path_entities<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                    <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span>getAppDir() <span class="pl-k">.</span> <span class="pl-s1"><span class="pl-pds">'</span>/../src/MVC/Tests/EjemploModule/Entity<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">                ),</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>proxy_dir<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-c1">null</span></span>
+<span class="pl-s2">            )),</span>
+<span class="pl-s2">            <span class="pl-k">new</span> <span class="pl-s3">MVC\Tests\Provider\</span><span class="pl-s3">MonologProvider</span>(<span class="pl-s3">array</span>(</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">            )),</span>
+<span class="pl-s2">            <span class="pl-k">new</span> <span class="pl-s3">MVC\Tests\Provider\</span><span class="pl-s3">TwigProvider</span>(<span class="pl-s3">array</span>(</span>
+<span class="pl-s2">                <span class="pl-s1"><span class="pl-pds">'</span>path<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span>getAppDir() <span class="pl-k">.</span> <span class="pl-s1"><span class="pl-pds">'</span>/../src/MVC/Tests/EjemploModule/Resources/views<span class="pl-pds">'</span></span></span>
+<span class="pl-s2">            )),</span>
+<span class="pl-s2">        );</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-vo">$providers</span>[] <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">MVC\Tests\EjemploModule\</span><span class="pl-s3">EjemploProvider</span>(<span class="pl-s3">array</span>(</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        ));</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-k">return</span> <span class="pl-vo">$providers</span>;</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * Set MVC Application Routes</span></span>
+<span class="pl-s2"><span class="pl-c">     * </span></span>
+<span class="pl-s2"><span class="pl-c">     * <span class="pl-k">@return</span> Route[]</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">setRoutes</span>()</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-vo">$routes</span> <span class="pl-k">=</span> <span class="pl-st">parent</span><span class="pl-k">::</span>setRoutes();</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-k">return</span> <span class="pl-vo">$routes</span>;</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-c">/**</span></span>
+<span class="pl-s2"><span class="pl-c">     * {@inheritdoc}</span></span>
+<span class="pl-s2"><span class="pl-c">     */</span></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">getModules</span>()</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-k">return</span> <span class="pl-vo">$this</span><span class="pl-k">-&gt;</span><span class="pl-vo">container</span><span class="pl-k">-&gt;</span>getModules();</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">}</span></pre></div>
+
+<h3>
+<a id="-rutas-vistas-y-controladores" class="anchor" href="#-rutas-vistas-y-controladores" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rut-vis-cont"></a> Rutas, Vistas y Controladores</h3>
+
+<blockquote>
+<ol>
+<li>Rutas
+
+<ul>
+<li>En el archivo <strong><code>app/config/routes.php</code></strong> o <strong><code>app/config/routes.json</code></strong> puedes configurar las acciones para las rutas que deseas configurar.</li>
+</ul>
+</li>
+<li>Vistas
+
+<ul>
+<li>Las vistas debe ser archivos con extensión <code>.html</code> o <code>.php</code>. </li>
+<li>Si usa un controlador para mostrar la vista, los nombres de estos archivos deben ser iguales a la accion del controlador. Ejemplo: <strong>accion/controlador</strong> <code>index</code>, <strong>archivo/vista</strong> <code>index.html</code>
+</li>
+<li>Los archivos deben ser guardados en la carpeta configurada en <strong>templates_path</strong> de la instancia de <strong><code>MVC\MVC</code></strong> con el nombre de la clase del controlador sin la palabra <strong>Controller</strong>. Ejemplo: <strong>carpeta</strong> <code>clase</code> donde clase -&gt; ClaseController.</li>
+</ul>
+</li>
+<li>Controladores
+
+<ul>
+<li>Se recomienda que cada controlador extienda de <strong><code>MVC\Controller\Controller</code></strong>.</li>
+<li>El retorno de cada controlador deben ser <code>cadenas de texto</code> o variables de tipo <code>arreglos asociativos</code> con valores de cualquier tipo.</li>
+<li>Para enviar varias variables a una vista, sean de cualquier tipo, el controlador debe retornar las variables dentro de la función <code>array()</code>. Ejemplo: <strong>$variable1, $variable2, $variable3</strong> <code>return array( 'variable1' =&gt; $variable1, 'variable2' =&gt; $variable2, 'variable3' =&gt; $variable3 )</code>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+
+<h2>
+<a id="-controladores" class="anchor" href="#-controladores" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="controladores"></a> Controladores</h2>
+
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">namespace</span> <span class="pl-en">ControllersNamespace</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\Controller\Controller</span>,</span>
+<span class="pl-s2">    <span class="pl-s3">MVC\MVC</span>,</span>
+<span class="pl-s2">    <span class="pl-s3">MVC\Server\HttpRequest</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-st">class</span> <span class="pl-en">ClaseController</span> <span class="pl-s">extends</span> <span class="pl-e">Controller</span></span>
+<span class="pl-s2">{</span>
+<span class="pl-s2">   <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">indexAction</span>(<span class="pl-s3">MVC</span> <span class="pl-vo">$mvc</span>, <span class="pl-s3">HttpRequest</span> <span class="pl-vo">$request</span>)</span>
+<span class="pl-s2">   {</span>
+<span class="pl-s2">       <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">'</span>&lt;p&gt;Resultado de la accion&lt;/p&gt;<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s2">   }</span>
+<span class="pl-s2">}</span></pre></div>
+
+<h2>
+<a id="-modelos" class="anchor" href="#-modelos" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="modelos"></a> Modelos</h2>
+
+<p>Un modelo se crea de la siguiente forma:</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">namespace</span> <span class="pl-en">ModelsNamespace</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\DataBase\Model</span>,</span>
+<span class="pl-s2">    <span class="pl-s3">MVC\DataBase\PDO</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-st">class</span> <span class="pl-en">Nombre_del_Modelo</span> <span class="pl-s">extends</span> <span class="pl-e">Model</span></span>
+<span class="pl-s2">{</span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-s3">__construct</span>(<span class="pl-s3">PDO</span> <span class="pl-vo">$pdo</span>)</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-st">parent</span><span class="pl-k">::</span>__construct(<span class="pl-vo">$pdo</span>, <span class="pl-s1"><span class="pl-pds">'</span>nombre_tabla<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">}</span></pre></div>
+
+<p>También DBAL Model</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">namespace</span> <span class="pl-en">ModelsNamespace</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">Doctrine\DBAL\Connection</span>,</span>
+<span class="pl-s2">    <span class="pl-s3">MVC\DataBase\DBALModel</span> <span class="pl-k">as</span> <span class="pl-s3">Model</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-st">class</span> <span class="pl-en">Nombre_del_Modelo</span> <span class="pl-s">extends</span> <span class="pl-e">Model</span></span>
+<span class="pl-s2">{</span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-s3">__construct</span>(<span class="pl-s3">Connection</span> <span class="pl-vo">$conn</span>)</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-st">parent</span><span class="pl-k">::</span>__construct(<span class="pl-vo">$conn</span>, <span class="pl-s1"><span class="pl-pds">'</span>nombre_tabla<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">}</span></pre></div>
+
+<h2>
+<a id="-rutas" class="anchor" href="#-rutas" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas"></a> Rutas</h2>
+
+<p>Una ruta se representa como cualquier URI con métodos de consulta que se envía al servidor. </p>
+
+<p>En la carpeta <code>app/config</code> en el archivo <strong><code>routes.json</code></strong> o <strong><code>routes.php</code></strong> se configuran las rutas de la aplicación.</p>
+
+<div class="highlight highlight-json"><pre>[{
+    <span class="pl-s1"><span class="pl-pds">"</span>method<span class="pl-pds">"</span></span>: [<span class="pl-s1"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>post<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>ajax<span class="pl-pds">"</span></span>],
+    <span class="pl-s1"><span class="pl-pds">"</span>pattern<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>/index<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>action<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>ControllerNamespace<span class="pl-cce">\\</span>ClaseController::indexAction<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>foo_index<span class="pl-pds">"</span></span>
+},
+{
+    <span class="pl-s1"><span class="pl-pds">"</span>method<span class="pl-pds">"</span></span>: [<span class="pl-s1"><span class="pl-pds">"</span>ajax<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>delete<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>post<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>put<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>head<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>options<span class="pl-pds">"</span></span>],
+    <span class="pl-s1"><span class="pl-pds">"</span>pattern<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>/index2<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>action<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>ControllerNamespace<span class="pl-cce">\\</span>FooController::index2Action<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s1"><span class="pl-pds">"</span>foo_index2<span class="pl-pds">"</span></span>
+}]</pre></div>
+
+<p>o</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\Server\Route</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">&lt;</span>?<span class="pl-c1">php</span></span>
+<span class="pl-s2"><span class="pl-k">return</span> <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">    <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">"</span>method<span class="pl-pds">"</span></span>  <span class="pl-k">=&gt;</span> [<span class="pl-s1"><span class="pl-pds">"</span>ajax<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>post<span class="pl-pds">"</span></span>],</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">"</span>pattern<span class="pl-pds">"</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">"</span>/index<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">"</span>action<span class="pl-pds">"</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">"</span>ControllerNamespace<span class="pl-cce">\\</span>FooController::indexAction<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s2">        <span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-s1"><span class="pl-pds">"</span>foo_index<span class="pl-pds">"</span></span></span>
+<span class="pl-s2">    ),</span>
+<span class="pl-s2">    <span class="pl-s3">array</span>(</span>
+<span class="pl-s2">        <span class="pl-k">new</span> <span class="pl-s3">Route</span>(<span class="pl-s3">Route</span><span class="pl-k">::</span><span class="pl-vo">$validMethods</span>, <span class="pl-s1"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>ControllerNamespace<span class="pl-cce">\\</span>FooController::indexAction2<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>foo_index2<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s2">    ),</span>
+<span class="pl-s2">);</span></pre></div>
+
+<h4>
+<a id="-get" class="anchor" href="#-get" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-get"></a> GET</h4>
+
+<p>Usa el método <strong>get()</strong> de tu aplicación u objeto <strong>MVC</strong> para crear recursos que devuelvan una llamada a un <strong>URI</strong> mediante el método <strong>HTTP GET</strong>.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$mvc-&gt;get("/hello/[a:name]", function($name) {
+    return "Hello $name.";
+}, 'hello_get');
+</code></pre>
+
+<h4>
+<a id="-post" class="anchor" href="#-post" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-post"></a> POST</h4>
+
+<p>Usa el método <strong>post()</strong> de tu aplicación u objeto <strong>MVC</strong> para crear recursos que devuelvan una llamada a un <strong>URI</strong> mediante el método <strong>HTTP POST</strong>.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$mvc-&gt;post("/hello/[a:name]", function($name) {
+    return "Hello $name";
+}, 'hello_post');
+</code></pre>
+
+<h4>
+<a id="-delete" class="anchor" href="#-delete" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-delete"></a> DELETE</h4>
+
+<p>Usa el método <strong>delete()</strong> de tu aplicación u objeto <strong>MVC</strong> para crear recursos que devuelvan una llamada a un <strong>URI</strong> mediante el método <strong>HTTP DELETE</strong>.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$mvc-&gt;delete("/hello/[i:id]", function($id) {
+    return "DELETE $id";
+}, 'hello_delete');
+</code></pre>
+
+<h4>
+<a id="-put" class="anchor" href="#-put" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-put"></a> PUT</h4>
+
+<p>Usa el método <strong>put()</strong> de tu aplicación u objeto <strong>MVC</strong> para crear recursos que devuelvan una llamada a un <strong>URI</strong> mediante el método <strong>HTTP PUT</strong>.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$mvc-&gt;put("/hello/[i:id]", function($id) {
+    return "PUT $id";
+}, 'hello_put');
+</code></pre>
+
+<h4>
+<a id="-options" class="anchor" href="#-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-options"></a> OPTIONS</h4>
+
+<p>Usa el método <strong>options()</strong> de tu aplicación u objeto <strong>MVC</strong> para crear recursos que devuelvan una llamada a un <strong>URI</strong> mediante el método <strong>HTTP OPTIONS</strong>.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$mvc-&gt;options("/hello/[i:id]", function($id) {
+    return "OPTIONS $id";
+}, 'hello_options');
+</code></pre>
+
+<h4>
+<a id="-head" class="anchor" href="#-head" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-head"></a> HEAD</h4>
+
+<p>Usa el método <strong>head()</strong> de tu aplicación u objeto <strong>MVC</strong> para crear recursos que devuelvan una llamada a un <strong>URI</strong> mediante el método <strong>HTTP HEAD</strong>.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$mvc-&gt;head("/hello/[i:id]", function($id) {
+    return "HEAD $id";
+}, 'hello_head');
+</code></pre>
+
+<h4>
+<a id="-ajax" class="anchor" href="#-ajax" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-ajax"></a> AJAX</h4>
+
+<p>Usa el método <strong>ajax()</strong> de tu aplicación u objeto <strong>MVC</strong> para crear recursos que devuelvan una llamada a un <strong>URI</strong> mediante el método <strong>HTTP AJAX</strong>.</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-vo">$mvc</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">\MVC\</span><span class="pl-s3">MVC</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>ajax(<span class="pl-s1"><span class="pl-pds">"</span>/hello/[i:id]<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vo">$id</span>) {</span>
+<span class="pl-s2">    <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>AJAX <span class="pl-vo">$id</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2">}, <span class="pl-s1"><span class="pl-pds">'</span>hello_ajax<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<h2>
+<a id="-grupos-de-rutas" class="anchor" href="#-grupos-de-rutas" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-group"></a> Grupos de rutas</h2>
+
+<p>Usa el método group de tu aplicación u objeto <strong>MVC</strong> para crear recursos de rutas agrupadas. Esto es para agrupar grupos de rutas que tienen el mismo prefijo.</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-vo">$mvc</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">\MVC\</span><span class="pl-s3">MVC</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>group(<span class="pl-s1"><span class="pl-pds">"</span>/admin<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vo">$route</span>) <span class="pl-k">use</span>(<span class="pl-vo">$mvc</span>) {</span>
+<span class="pl-s2">    <span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>get(<span class="pl-vo">$route</span>, <span class="pl-st">function</span>() {</span>
+<span class="pl-s2">        <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>Admin index<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2">    }, <span class="pl-s1"><span class="pl-pds">'</span>admin_index<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">    <span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>get(<span class="pl-s1"><span class="pl-pds">"</span><span class="pl-vo">$route</span>/other<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() {</span>
+<span class="pl-s2">        <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>Admin other route.<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2">    }, <span class="pl-s1"><span class="pl-pds">'</span>admin_other<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">});</span></pre></div>
+
+<h2>
+<a id="-parámetros-de-rutas" class="anchor" href="#-par%C3%A1metros-de-rutas" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="rutas-params"></a> Parámetros de rutas</h2>
+
+<p>Los tipos de variables válidos para las rutas son:</p>
+
+<ul>
+<li>
+<strong>[i]</strong> Entero</li>
+<li>
+<strong>[a]</strong> Alfanumerico</li>
+<li>
+<strong>[h]</strong> Hexadecimal</li>
+<li>
+<strong>[*]</strong> Cualquier valor</li>
+</ul>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-vo">$mvc</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">\MVC\</span><span class="pl-s3">MVC</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>ajax(<span class="pl-s1"><span class="pl-pds">"</span>/hello/[i:id]/[a:name]<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vo">$id</span>, <span class="pl-vo">$name</span>) {</span>
+<span class="pl-s2">    <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>AJAX id = <span class="pl-vo">$id</span>, name = <span class="pl-vo">$name</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2">}, <span class="pl-s1"><span class="pl-pds">'</span>hello_id_name<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<h2>
+<a id="-redireccionamiento" class="anchor" href="#-redireccionamiento" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="redirect"></a> Redireccionamiento</h2>
+
+<p>Esta función redirecciona a una ruta...</p>
+
+<div class="highlight highlight-php"><pre><span class="pl-s2"><span class="pl-vo">$mvc</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-s3">\MVC\</span><span class="pl-s3">MVC</span>();</span>
+<span class="pl-s2"><span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>get(<span class="pl-s1"><span class="pl-pds">"</span>/<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>() <span class="pl-k">use</span>(<span class="pl-vo">$mvc</span>){</span>
+<span class="pl-s2">    <span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>redirect(<span class="pl-s1"><span class="pl-pds">'</span>/redirect<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">}, <span class="pl-s1"><span class="pl-pds">'</span>home_redirect<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2"><span class="pl-vo">$mvc</span><span class="pl-k">-&gt;</span>get(<span class="pl-s1"><span class="pl-pds">"</span>/redirect<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(){</span>
+<span class="pl-s2">    <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>Redirect<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s2">}, <span class="pl-s1"><span class="pl-pds">'</span>redirect<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<h2>
+<a id="-proveedores-o-servicios" class="anchor" href="#-proveedores-o-servicios" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="providers"></a> Proveedores o servicios</h2>
+
+<p>Este aspecto es para registrar otros servicios independientes del Simple PHP MVC extendiendo de <strong><code>MVC\Provider\Provider</code></strong>. Por ejemplo: Doctrine Object Relational Mapper (ORM), SwiftMailer, Monolog, etc. </p>
+
+<div class="highlight highlight-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s2"></span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">namespace</span> <span class="pl-en">ProvidersNamespace</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-k">use</span> <span class="pl-s3">MVC\MVC</span>,</span>
+<span class="pl-s2">    <span class="pl-s3">MVC\Provider\Provider</span>;</span>
+<span class="pl-s2"></span>
+<span class="pl-s2"><span class="pl-st">class</span> <span class="pl-en">ExampleProvider</span> <span class="pl-s">extends</span> <span class="pl-e">Provider</span></span>
+<span class="pl-s2">{</span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-s3">__construct</span>(array options = array())</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-st">parent</span><span class="pl-k">::</span>__contruct(<span class="pl-vo">$options</span>);</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">boot</span>(<span class="pl-s3">MVC</span> <span class="pl-vo">$mvc</span>)</span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-c">//Configuraciones</span></span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    <span class="pl-s">public</span> <span class="pl-st">function</span> <span class="pl-en">register</span>(<span class="pl-s3">MVC</span> <span class="pl-vo">$mvc</span>) </span>
+<span class="pl-s2">    {</span>
+<span class="pl-s2">        <span class="pl-c">// Registro de variables de uso o de servicios</span></span>
+<span class="pl-s2">        <span class="pl-vo">$app</span><span class="pl-k">-&gt;</span>setCvpp(<span class="pl-s1"><span class="pl-pds">'</span>example.name<span class="pl-pds">'</span></span>, <span class="pl-s3">get_class</span>(<span class="pl-vo">$this</span>));</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">}</span></pre></div>
+
+<h2>
+<a id="-otros-aspectos" class="anchor" href="#-otros-aspectos" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="otros"></a> Otros aspectos</h2>
+
+<p>Para usar los objetos Response, HttpRequest, View, están las siguientes funciones:</p>
+
+<h3>
+<a id="-view" class="anchor" href="#-view" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="otros-view"></a> view()</h3>
+
+<p>Devuelve el objeto de la vistas.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$view = $mvc-&gt;view();
+</code></pre>
+
+<h3>
+<a id="-request" class="anchor" href="#-request" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="otros-request"></a> request()</h3>
+
+<p>Devuelve el objeto <strong><code>MVC\Server\HttpRequest.</code></strong></p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$request = $mvc-&gt;request();
+</code></pre>
+
+<h3>
+<a id="-response" class="anchor" href="#-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="otros-response"></a> response()</h3>
+
+<p>Devuelve el objeto \MVC\server\Response.</p>
+
+<pre><code>$mvc = new \MVC\MVC();
+$response = $mvc-&gt;response();
+</code></pre>
+
+<h3>
+<a id="-usando-la-consola" class="anchor" href="#-usando-la-consola" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="usando-consola"></a> Usando la consola</h3>
+
+<blockquote>
+<p>Actualmente en desarrollo. Esperar la version 2.0</p>
+</blockquote>
+
+<h3>
+<a id="-autor" class="anchor" href="#-autor" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a name="autor"></a> <strong>Autor:</strong>
+</h3>
+
+<p>Ramón Serrano <a href="mailto:ramon.calle.88@gmail.com">ramon.calle.88@gmail.com</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Simple PHP MVC Application maintained by <a href="https://github.com/simple-php-mvc">simple-php-mvc</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
