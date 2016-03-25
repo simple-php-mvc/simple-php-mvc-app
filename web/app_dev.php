@@ -12,5 +12,10 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 
 require_once __DIR__ . '/../app/autoload.php';
 
-$mvc = new AppMVC();
+// Symfony Debug
+Symfony\Component\Debug\ExceptionHandler::register();
+
+$mvc = new AppMVC(array(
+    'debug' => true
+));
 $mvc->run();

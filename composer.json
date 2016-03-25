@@ -13,6 +13,7 @@
   "require": {
     "php": ">=5.3.3",
     "simple-php-mvc/simple-php-mvc": ">=1.6",
-    "simple-php-mvc/installer-module": ">=0.1"
+    "simple-php-mvc/installer-module": ">=0.1",
+    "symfony/debug": "^3.0"
   }
 }
